@@ -1,0 +1,54 @@
+# --- Secrets (never commit) ---
+.env
+.env.local
+**/secrets/
+*.pem
+*.key
+firebase-service-account.json
+
+# Android/iOS signing material — never commit real release keys.
+*.jks
+*.keystore
+*.p12
+*.mobileprovision
+
+# NOTE: google-services.json / GoogleService-Info.plist are intentionally
+# NOT ignored — Firebase client config is safe to commit (it's protected by
+# Firebase Auth + security rules, not secrecy) and the app won't build for
+# anyone else without it.
+
+# --- Node / backend ---
+node_modules/
+backend/dist/
+backend/coverage/
+npm-debug.log*
+package-lock.json.bak
+
+# --- Prisma ---
+backend/prisma/migrations/dev.db
+
+# --- Flutter / Dart ---
+app/.dart_tool/
+app/.flutter-plugins
+app/.flutter-plugins-dependencies
+app/.packages
+app/.pub-cache/
+app/.pub/
+app/build/
+app/**/generated_plugin_registrant.dart
+app/**/*.g.dart
+app/**/*.freezed.dart
+app/**/*.mocks.dart
+app/coverage/
+app/android/local.properties
+app/android/key.properties
+app/ios/Flutter/Generated.xcconfig
+app/ios/Flutter/flutter_export_environment.sh
+app/*.iml
+app/.idea/
+
+# --- IDE / OS ---
+.DS_Store
+.vscode/
+*.iml
+firebase-debug.log

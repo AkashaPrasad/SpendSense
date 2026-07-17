@@ -1,0 +1,24 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: spendsense-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: spendsense
+      POSTGRES_PASSWORD: spendsense
+      POSTGRES_DB: spendsense
+    ports:
+      # Host 5433 -> container 5432. This machine already runs a native
+      # Postgres@14 on 5432 (Homebrew), so we avoid that port to prevent
+      # docker-compose from failing to bind it.
+      - '5433:5432'
+    volumes:
+      - spendsense-postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U spendsense -d spendsense']
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+volumes:
+  spendsense-postgres-data:
