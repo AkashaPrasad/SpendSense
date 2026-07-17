@@ -1,0 +1,28 @@
+import { NextFunction, Request, Response } from 'express';
+import { ZodError } from 'zod';
+
+export class HttpError extends Error {
+  constructor(public status: number, message: string, public details?: unknown) {
+    super(message);
+    this.name = 'HttpError';
+  }
+}
+
+export function notFoundHandler(req: Request, res: Response) {
+  res.status(404).json({ error: 'Not found', path: req.path });
+}
+
+export function errorHandler(err: unknown, _req: Request, res: Response, _next: NextFunction) {
+  if (err instanceof ZodError) {
+    res.status(400).json({ error: 'Validation failed', details: err.flatten() });
+    return;
+  }
+
+  if (err instanceof HttpError) {
+    res.status(err.status).json({ error: err.message, details: err.details });
+    return;
+  }
+
+  console.error('[unhandled]', err);
+  res.status(500).json({ error: 'Internal server error' });
+}
