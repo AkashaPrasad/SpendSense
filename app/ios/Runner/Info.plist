@@ -26,6 +26,10 @@
 	<string>$(FLUTTER_BUILD_NUMBER)</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSCameraUsageDescription</key>
+	<string>SpendSense uses your camera to scan receipts and automatically extract expense details.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>SpendSense uses your photo library so you can pick an existing receipt photo to scan.</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
