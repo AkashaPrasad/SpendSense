@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "1042221686578",
+    "project_id": "xenon-world-502717-f0",
+    "storage_bucket": "xenon-world-502717-f0.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1042221686578:android:3463b2c87e211f910c812b",
+        "android_client_info": {
+          "package_name": "com.spendsense.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBUjPFRaBIQcXQ1zu10qxheCB4JnpoXu5k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1042221686578:android:7e4f05fb2b834dd10c812b",
+        "android_client_info": {
+          "package_name": "com.spendsense.spendsense"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBUjPFRaBIQcXQ1zu10qxheCB4JnpoXu5k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
