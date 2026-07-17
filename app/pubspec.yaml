@@ -1,0 +1,74 @@
+name: spendsense
+description: "SpendSense — AI-powered personal expense tracker."
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.12.2
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  # State management (Riverpod 2.0 code-gen)
+  flutter_riverpod: ^2.6.1
+  riverpod_annotation: ^2.6.1
+
+  # Routing
+  go_router: ^15.1.2
+
+  # Networking
+  dio: ^5.7.0
+
+  # Firebase Auth
+  firebase_core: ^3.8.0
+  firebase_auth: ^5.3.3
+  google_sign_in: ^6.2.2
+
+  # Local offline-first cache
+  drift: ^2.22.1
+  sqlite3_flutter_libs: ^0.5.28
+  path_provider: ^2.1.5
+  path: ^1.9.0
+
+  # Connectivity for offline/online sync
+  connectivity_plus: ^6.1.0
+
+  # Charts
+  fl_chart: ^0.70.1
+
+  # Typography
+  google_fonts: ^6.2.1
+
+  # Receipt capture
+  image_picker: ^1.1.2
+
+  # Utilities
+  equatable: ^2.0.7
+  intl: ^0.20.2
+  uuid: ^4.5.1
+  decimal: ^3.1.2
+  logger: ^2.5.0
+  flutter_dotenv: ^5.2.1
+  cupertino_icons: ^1.0.8
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  integration_test:
+    sdk: flutter
+
+  flutter_lints: ^6.0.0
+  build_runner: ^2.4.13
+  riverpod_generator: ^2.6.3
+  drift_dev: ^2.22.1
+  mocktail: ^1.0.4
+  riverpod_lint: ^2.6.3
+  custom_lint: ^0.7.0
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - .env
