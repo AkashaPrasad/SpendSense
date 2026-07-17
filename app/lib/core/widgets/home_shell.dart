@@ -14,6 +14,36 @@ class HomeShell extends StatelessWidget {
     return 0;
   }
 
+  Future<void> _showAddOptions(BuildContext context) async {
+    await showModalBottomSheet<void>(
+      context: context,
+      builder: (sheetContext) => SafeArea(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            ListTile(
+              leading: const Icon(Icons.camera_alt_outlined),
+              title: const Text('Scan receipt'),
+              subtitle: const Text('Camera or gallery — Gemini fills in the details'),
+              onTap: () {
+                Navigator.of(sheetContext).pop();
+                context.push('/capture-receipt');
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.edit_outlined),
+              title: const Text('Add manually'),
+              onTap: () {
+                Navigator.of(sheetContext).pop();
+                context.push('/add-expense');
+              },
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final location = GoRouterState.of(context).matchedLocation;
@@ -23,7 +53,7 @@ class HomeShell extends StatelessWidget {
       body: child,
       floatingActionButton: index == 1
           ? FloatingActionButton.extended(
-              onPressed: () => context.push('/add-expense'),
+              onPressed: () => _showAddOptions(context),
               icon: const Icon(Icons.add),
               label: const Text('Add expense'),
             )
