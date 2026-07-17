@@ -6,7 +6,15 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 class Env {
   Env._();
 
-  static Future<void> load() => dotenv.load(fileName: '.env');
+  /// Tolerant of a missing .env (e.g. first run before `cp .env.example
+  /// .env`) — falls back to the defaults below rather than crashing.
+  static Future<void> load() async {
+    try {
+      await dotenv.load(fileName: '.env');
+    } catch (_) {
+      // No file yet — backendBaseUrl below has a hardcoded fallback.
+    }
+  }
 
   static String get backendBaseUrl =>
       dotenv.maybeGet('BACKEND_BASE_URL') ?? 'http://localhost:4000';

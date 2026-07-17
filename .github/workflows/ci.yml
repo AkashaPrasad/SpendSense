@@ -25,6 +25,9 @@ jobs:
       - name: Install dependencies
         run: flutter pub get
 
+      - name: Set up env file
+        run: cp .env.example .env
+
       - name: Generate code (Riverpod + Drift)
         run: dart run build_runner build --delete-conflicting-outputs
 
