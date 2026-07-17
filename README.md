@@ -158,10 +158,12 @@ cd app
 cp .env.example .env      # BACKEND_BASE_URL — defaults to localhost:4000
 flutter pub get
 dart run build_runner build --delete-conflicting-outputs   # generates Riverpod + Drift code
-flutter run -d macos      # or: ios, android, windows, linux
+flutter run -d chrome     # or: macos, ios, android, windows, linux
 ```
 
 On the **Android emulator**, set `BACKEND_BASE_URL=http://10.0.2.2:4000` in `app/.env` (the emulator's alias for your host machine) instead of `localhost`.
+
+Web runs the offline cache on SQLite compiled to WebAssembly (`web/sqlite3.wasm` + `web/drift_worker.js`, via [`drift_flutter`](https://pub.dev/packages/drift_flutter)) — same Drift code, same offline-first behavior, no separate code path to maintain.
 
 ## Using it
 
@@ -193,8 +195,7 @@ Everything else (Firebase config, the backend's service account) is already gene
 
 ## Known limitations
 
-- **Web isn't a supported target.** The offline-first cache uses Drift over native SQLite (`dart:ffi`), which doesn't compile for the web target. Android, iOS, macOS, Windows, and Linux all work; web would need a separate `sqlite3.wasm` + IndexedDB backend, which wasn't in scope here.
-- **Google Sign-In needs the manual Firebase console step** described above, plus a registered SHA-1 for Android — this can't be done from a script since it depends on a signing keystore.
+- **Google Sign-In needs the manual Firebase console step** described above, plus a registered SHA-1 for Android — this can't be done from a script since it depends on a signing keystore. Until then, tapping "Continue with Google" fails gracefully with an error message rather than crashing the app (it used to crash the whole app on web specifically, since `GoogleSignIn()` was constructed eagerly at boot instead of lazily on first use — fixed).
 - **Sync conflict resolution is last-write-wins**, not a full CRDT/merge strategy. Fine for a single-user app used from one device at a time; editing the same expense concurrently from two offline devices would let the later sync win.
 - **The natural-language query bar is intentionally narrow**: it classifies one of six intents (category total, overall total, trend, compare categories, spend-vs-income, budget-vs-actual) via Gemini function-calling rather than open-ended SQL generation. That's a deliberate security/correctness choice (see [Why this exists](#why-this-exists)), not a bug — but it means genuinely novel question shapes fall back to "try rephrasing it."
 - **AI endpoints are rate-limited** (10 requests/minute/user by default, `RATE_LIMIT_AI_PER_MINUTE` in `backend/.env`) to protect the free-tier Gemini quota from runaway client bugs.
